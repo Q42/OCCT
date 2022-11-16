@@ -380,9 +380,9 @@ else()
   OCCT_INSTALL_FILE_OR_DIR ("OCCT_LGPL_EXCEPTION.txt" ".")
 endif()
 
-if(APPLE)
-  set (INSTALL_NAME_DIR "" CACHE STRING "install_name library suffix on OS X (e.g. @executable_path/../Frameworks)")
-endif()
+# if(APPLE)
+#   set (INSTALL_NAME_DIR "/Library/Frameworks" CACHE STRING "install_name library suffix on OS X (e.g. @executable_path/../Frameworks)")
+# endif()
 
 # a directory recognized as a 'patch' for OCCT
 set (BUILD_PATCH "" CACHE PATH "${BUILD_PATCH_DESCR}")
@@ -452,6 +452,10 @@ else()
   set (USE_GLES2 OFF CACHE BOOL "${USE_GLES2_DESCR}")
 endif()
 
+if (IOS)
+  add_compile_definitions(TARGET_OS_IPHONE=1)
+endif()
+
 # include the patched or original list of modules
 # list <MODULENAME>_TOOLKITS is created foreach module and contains its toolkits
 # list <OCCT_MODULES> will contain all modules
@@ -465,9 +469,69 @@ if (ANDROID AND BUILD_MODULE_Draw)
   message (STATUS "Info. Draw module is turned off due to it is not supported on Android")
   set (BUILD_MODULE_Draw OFF CACHE BOOL "${BUILD_MODULE_Draw_DESCR}" FORCE)
 endif()
+
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore" AND BUILD_MODULE_Draw)
   message (STATUS "Info. Draw module is turned off due to it is not supported on UWP")
   set (BUILD_MODULE_Draw OFF CACHE BOOL "${BUILD_MODULE_Draw_DESCR}" FORCE)
+endif()
+
+if (IOS AND BUILD_MODULE_Draw)
+  message (STATUS "Info. Draw module is turned off due to it is not supported on iOS")
+  set (BUILD_MODULE_Draw OFF CACHE BOOL "${BUILD_MODULE_Draw_DESCR}" FORCE)
+endif()
+
+
+if (APPLE)
+  set (CSF_objc        "objc")
+
+  # frameworks
+  if (IOS)
+    find_library (Appkit_LIB NAMES UIKit)
+    set (CSF_Appkit ${Appkit_LIB})
+  else()
+    find_library (Appkit_LIB NAMES AppKit)
+    set (CSF_Appkit ${Appkit_LIB})
+  endif()
+  OCCT_CHECK_AND_UNSET (Appkit_LIB)
+
+  find_library (IOKit_LIB NAMES IOKit)
+  set (CSF_IOKit ${IOKit_LIB})
+  OCCT_CHECK_AND_UNSET (IOKit_LIB)
+
+  if (IOS)
+    find_library (OpenGlesLibs_LIB NAMES OpenGLES)
+    set (CSF_OpenGlesLibs ${OpenGlesLibs_LIB})
+    OCCT_CHECK_AND_UNSET (OpenGlesLibs_LIB)
+  elseif (USE_XLIB)
+    set (CSF_OpenGlLibs "GL")
+    set (CSF_XwLibs     "X11")
+  else()
+    find_library (OpenGlLibs_LIB NAMES OpenGL)
+    set (CSF_OpenGlLibs ${OpenGlLibs_LIB})
+    OCCT_CHECK_AND_UNSET (OpenGlLibs_LIB)
+  endif()
+
+elseif (EMSCRIPTEN)
+  set (CSF_ThreadLibs   "pthread rt stdc++")
+  set (CSF_OpenGlesLibs "EGL GLESv2")
+  set (CSF_dl           "dl")
+elseif (ANDROID)
+  set (CSF_ThreadLibs  "c")
+  set (CSF_OpenGlesLibs "EGL GLESv2")
+  set (CSF_androidlog  "log")
+elseif (UNIX)
+  set (CSF_ThreadLibs  "pthread rt stdc++")
+  if (USE_XLIB)
+    set (CSF_OpenGlLibs "GL")
+    set (CSF_XwLibs     "X11")
+  else()
+    set (CSF_OpenGlLibs "GL EGL")
+  endif()
+  set (CSF_OpenGlesLibs "EGL GLESv2")
+  set (CSF_dl          "dl")
+  if (USE_FREETYPE)
+    set (CSF_fontconfig "fontconfig")
+  endif()
 endif()
 
 # Overview

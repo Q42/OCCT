@@ -11,7 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-#if defined(__APPLE__) && !defined(HAVE_XLIB)
+#if defined(__APPLE__) && !defined(HAVE_XLIB) && !defined(TARGET_OS_IPHONE)
 
 #import <Cocoa/Cocoa.h>
 
