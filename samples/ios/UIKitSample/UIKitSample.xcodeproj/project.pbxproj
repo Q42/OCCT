@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A24B9FA1EB0A7CC00A5F490 /* linkrods.step in Resources */ = {isa = PBXBuildFile; fileRef = 0A24B9F91EB0A7CC00A5F490 /* linkrods.step */; };
 		0A7DEDD61E2D1D0F00267B9B /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEDD41E2D1D0900267B9B /* libfreetype.a */; };
 		0A7DEDE71E2D28E300267B9B /* libTKBRep.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEDDE1E2D28C500267B9B /* libTKBRep.a */; };
 		0A7DEDE81E2D28E300267B9B /* libTKernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEDDF1E2D28C800267B9B /* libTKernel.a */; };
@@ -35,7 +34,6 @@
 		0A7DEE3F1E2D2BB000267B9B /* libTKOpenGles.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEE091E2D2A9700267B9B /* libTKOpenGles.a */; };
 		0A7DEE401E2D2BEA00267B9B /* libTKSTEP209.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEE0F1E2D2AAB00267B9B /* libTKSTEP209.a */; };
 		0A7DEE411E2D2C1500267B9B /* libTKXSBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7DEE1D1E2D2ADC00267B9B /* libTKXSBase.a */; };
-		0AAE0DE61EAF816E00C1F65B /* screw.step in Resources */ = {isa = PBXBuildFile; fileRef = 0AAE0DE51EAF816D00C1F65B /* screw.step */; };
 		0AE286641EB0D29B00A9D719 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE286631EB0D29A00A9D719 /* libz.tbd */; };
 		3405C9E01DE2F04E008BADB9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3405C9DF1DE2F04E008BADB9 /* main.mm */; };
 		3405C9E31DE2F04E008BADB9 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3405C9E21DE2F04E008BADB9 /* AppDelegate.mm */; };
@@ -49,10 +47,11 @@
 		343FDCA61DE42F37009AEE51 /* GLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343FDCA51DE42F37009AEE51 /* GLViewController.mm */; };
 		34424E031DE70100008B56DA /* OcctDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34424E021DE70100008B56DA /* OcctDocument.mm */; };
 		34424E061DE72D2E008B56DA /* CafShapePrs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34424E051DE72D2E008B56DA /* CafShapePrs.mm */; };
+		D5E78F9B2924D564000E896E /* screw.step in Resources */ = {isa = PBXBuildFile; fileRef = D5E78F992924D564000E896E /* screw.step */; };
+		D5E78F9C2924D564000E896E /* linkrods.step in Resources */ = {isa = PBXBuildFile; fileRef = D5E78F9A2924D564000E896E /* linkrods.step */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A24B9F91EB0A7CC00A5F490 /* linkrods.step */ = {isa = PBXFileReference; lastKnownFileType = text; name = linkrods.step; path = ../occt/data/step/linkrods.step; sourceTree = "<group>"; };
 		0A7DED6E1E2D15B800267B9B /* dev */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dev; path = ..; sourceTree = "<group>"; };
 		0A7DEDD41E2D1D0900267B9B /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../3rdparty/lib/libfreetype.a; sourceTree = "<group>"; };
 		0A7DEDDE1E2D28C500267B9B /* libTKBRep.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTKBRep.a; path = ../occt/lib/libTKBRep.a; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		0A7DEE1B1E2D2AD500267B9B /* libTKXmlTObj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTKXmlTObj.a; path = ../occt/lib/libTKXmlTObj.a; sourceTree = "<group>"; };
 		0A7DEE1C1E2D2AD900267B9B /* libTKXmlXCAF.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTKXmlXCAF.a; path = ../occt/lib/libTKXmlXCAF.a; sourceTree = "<group>"; };
 		0A7DEE1D1E2D2ADC00267B9B /* libTKXSBase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTKXSBase.a; path = ../occt/lib/libTKXSBase.a; sourceTree = "<group>"; };
-		0AAE0DE51EAF816D00C1F65B /* screw.step */ = {isa = PBXFileReference; lastKnownFileType = text; name = screw.step; path = ../occt/data/step/screw.step; sourceTree = "<group>"; };
 		0AE286631EB0D29A00A9D719 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3405C9DB1DE2F04E008BADB9 /* UIKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3405C9DF1DE2F04E008BADB9 /* main.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -125,6 +123,8 @@
 		34424E021DE70100008B56DA /* OcctDocument.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OcctDocument.mm; sourceTree = "<group>"; };
 		34424E041DE72C23008B56DA /* CafShapePrs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CafShapePrs.h; sourceTree = "<group>"; };
 		34424E051DE72D2E008B56DA /* CafShapePrs.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CafShapePrs.mm; sourceTree = "<group>"; };
+		D5E78F992924D564000E896E /* screw.step */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screw.step; path = ../../../../data/step/screw.step; sourceTree = "<group>"; };
+		D5E78F9A2924D564000E896E /* linkrods.step */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linkrods.step; path = ../../../../data/step/linkrods.step; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,8 +172,6 @@
 		3405C9D21DE2F04E008BADB9 = {
 			isa = PBXGroup;
 			children = (
-				0A24B9F91EB0A7CC00A5F490 /* linkrods.step */,
-				0AAE0DE51EAF816D00C1F65B /* screw.step */,
 				3405C9DD1DE2F04E008BADB9 /* UIKitSample */,
 				3405C9DC1DE2F04E008BADB9 /* Products */,
 				3405CA791DE31565008BADB9 /* Frameworks */,
@@ -191,6 +189,8 @@
 		3405C9DD1DE2F04E008BADB9 /* UIKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				D5E78F9A2924D564000E896E /* linkrods.step */,
+				D5E78F992924D564000E896E /* screw.step */,
 				34424E051DE72D2E008B56DA /* CafShapePrs.mm */,
 				34424E041DE72C23008B56DA /* CafShapePrs.h */,
 				34424E011DE6FF05008B56DA /* OcctDocument.h */,
@@ -321,6 +321,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -339,9 +340,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A24B9FA1EB0A7CC00A5F490 /* linkrods.step in Resources */,
-				0AAE0DE61EAF816E00C1F65B /* screw.step in Resources */,
 				3405C9EE1DE2F04E008BADB9 /* LaunchScreen.storyboard in Resources */,
+				D5E78F9C2924D564000E896E /* linkrods.step in Resources */,
+				D5E78F9B2924D564000E896E /* screw.step in Resources */,
 				3405C9EB1DE2F04E008BADB9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,7 +420,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -467,7 +468,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
@@ -491,7 +492,6 @@
 				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../occt/inc;
 				INFOPLIST_FILE = UIKitSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					../occt/lib,
@@ -520,7 +520,6 @@
 				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../occt/inc;
 				INFOPLIST_FILE = UIKitSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					../occt/lib,
