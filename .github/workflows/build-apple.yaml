@@ -49,34 +49,32 @@ jobs:
             -project OCCT.xcodeproj \
             -scheme ALL_BUILD \
             -destination generic/platform=$PLATFORM \
-            -archivePath "xcarchives/OCCT-$PLATFORM.xcarchive" \
+            -archivePath "xcarchives/occt-$PLATFORM.xcarchive" \
+            INSTALL_PATH="/usr/local/lib" \
             SKIP_INSTALL=NO \
             BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-            ARCHS='$(ARCHS_STANDARD)' \
-            BUILT_PRODUCTS_DIR='$(CONFIGURATION_BUILD_DIR)'\
-            INSTALL_DIR='$(DSTROOT)$(INSTALL_PATH)'
+            ARCHS='$(ARCHS_STANDARD)'
 
     - name: Merge frameworks
       working-directory: build
       run: |
-        for ARCHIVE in $(ls xcarchives/*.xcarchive)
+        for ARCHIVE in xcarchives/*.xcarchive;
         do
-            libtool -static -o xcarchives/$ARCHIVE/Products/usr/local/lib/occt.a xcarchives/$ARCHIVE/Products/usr/local/lib/*.a
+            libtool -static -o $ARCHIVE/Products/usr/local/lib/occt.a $ARCHIVE/Products/usr/local/lib/*.a
         done
-    # lipo -create xcarchives/OCCT-iOS-Simulator-*.xcarchive/Products/usr/local/lib/occt.a -output occt-simulator.a
+      #  lipo -create xcarchives/occt-iOS-Simulator-*.xcarchive/Products/usr/local/lib/occt.a -output occt-simulator.a
     
     - name: Copy header files
       working-directory: build
       run: |
         mkdir -p xcheaders/opencascade
-        cp $(sed -nr 's/\#include "(.*)"/\1/p' ../include/opencascade/*) ./xcheaders/opencascade/
+        cp $(sed -nr 's/\#include "(.*)"/\1/p' ./include/opencascade/*) ./xcheaders/opencascade/
 
     - name: Create xcframework
       working-directory: build
       run: |
-        mkdir xcframeworks
         xcodebuild -create-xcframework \
-          -library xcarchives/OCCT-iOS.xcarchive/Products/usr/local/lib/occt.a \
+          -library xcarchives/occt-iOS.xcarchive/Products/usr/local/lib/occt.a \
           -headers xcheaders/opencascade \
           -output xcframeworks/occt.xcframework
 
@@ -84,4 +82,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: occt.xcframework
-        path: build/xcframeworks/occt.xcframework
+        path: xcframeworks/build/occt.xcframework
