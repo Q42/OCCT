@@ -19,9 +19,6 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      #cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       run: |
         mkdir build && cd build
         cmake .. \
@@ -47,6 +44,7 @@ jobs:
     - name: Build for iOS
       env:
         PLATFORM: "iOS"
+      working-directory: build
       run: |
         xcodebuild archive \
             -project OCCT.xcodeproj \
@@ -61,6 +59,7 @@ jobs:
             DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM
 
     - name: Merge frameworks
+      working-directory: build
       run: |
         for ARCHIVE in $(ls xcarchives/*.xcarchive)
         do
@@ -69,12 +68,13 @@ jobs:
     # lipo -create xcarchives/OCCT-iOS-Simulator-*.xcarchive/Products/usr/local/lib/occt.a -output occt-simulator.a
     
     - name: Copy header files
-      # Resolves the header files to find their actual contents and copies them to the 'xcheaders/opencascade' directory.
+      working-directory: build
       run: |
         mkdir -p xcheaders/opencascade
         cp $(sed -nr 's/\#include "(.*)"/\1/p' ../include/opencascade/*) ./xcheaders/opencascade/
 
     - name: Create xcframework
+      working-directory: build
       run: |
         mkdir xcframeworks
         xcodebuild -create-xcframework \
@@ -86,4 +86,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: occt.xcframework
-        path: xcframeworks/occt.xcframework
+        path: build/xcframeworks/occt.xcframework
