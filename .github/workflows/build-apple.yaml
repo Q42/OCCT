@@ -7,7 +7,6 @@ on:
     branches: [ "develop" ]
 
 env:
-  DEVELOPMENT_TEAM: "8J6VSUTQNX"
   SDK: "iphoneos"
   SDK_VERSION: "16.0"
 
@@ -55,8 +54,7 @@ jobs:
             BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
             ARCHS='$(ARCHS_STANDARD)' \
             BUILT_PRODUCTS_DIR='$(CONFIGURATION_BUILD_DIR)'\
-            INSTALL_DIR='$(DSTROOT)$(INSTALL_PATH)' \
-            DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM
+            INSTALL_DIR='$(DSTROOT)$(INSTALL_PATH)'
 
     - name: Merge frameworks
       working-directory: build
