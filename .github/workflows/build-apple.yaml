@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: [self-hosted, macOS]
 
     steps:
     - uses: actions/checkout@v3
@@ -82,4 +82,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: occt.xcframework
-        path: xcframeworks/build/occt.xcframework
+        path: build/xcframeworks/occt.xcframework
