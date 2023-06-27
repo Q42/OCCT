@@ -17,9 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install CMake
-      run: brew install cmake
-
     - name: Configure CMake
       run: |
         mkdir build && cd build
