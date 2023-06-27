@@ -78,8 +78,12 @@ jobs:
           -headers xcheaders/opencascade \
           -output xcframeworks/occt.xcframework
 
+    - name: Zip xcframework
+      working-directory: build
+      run: zip -r xcframeworks/occt.xcframework.zip xcframeworks/occt.xcframework
+
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: occt.xcframework
-        path: build/xcframeworks/occt.xcframework
+        path: build/xcframeworks/occt.xcframework.zip
