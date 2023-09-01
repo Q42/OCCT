@@ -76,7 +76,7 @@ jobs:
     - name: Copy header files
       run: |
         mkdir -p xcheaders/opencascade
-        cp $(sed -nr 's/\#include "(.*)"/\1/p' ./build/include/opencascade/*) ./xcheaders/opencascade/
+        cp $(sed -nr 's/\#include "(.*)"/\1/p' ./build-ios/include/opencascade/*) ./xcheaders/opencascade/
 
     - name: Create XCFramework bundle
       run: |
