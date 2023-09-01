@@ -2,13 +2,9 @@ name: Build for Apple platforms
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: ["develop"]
   pull_request:
-    branches: [ "develop" ]
-
-env:
-  SDK: "iphoneos"
-  SDK_VERSION: "16.0"
+    branches: ["develop"]
 
 jobs:
   build:
@@ -17,9 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Configure CMake
+    - name: Configure CMake for iOS
+      env:
+        SDK: "iphoneos"
+        SDK_VERSION: "16.0"
       run: |
-        mkdir build && cd build
+        mkdir xcarchives
+        mkdir build-ios && cd build-ios
         cmake .. \
             -G Xcode \
             -DIOS=1 \
@@ -38,52 +38,60 @@ jobs:
             -DUSE_TCL=0 \
             -DUSE_TBB=0 \
             -DUSE_VTK=0
-        mkdir xcarchives
 
     - name: Build for iOS
-      env:
-        PLATFORM: "iOS"
-      working-directory: build
+      working-directory: build-ios
       run: |
         xcodebuild archive \
             -project OCCT.xcodeproj \
             -scheme ALL_BUILD \
-            -destination generic/platform=$PLATFORM \
-            -archivePath "xcarchives/occt-$PLATFORM.xcarchive" \
+            -destination "generic/platform=iOS" \
+            -archivePath "../xcarchives/occt-iOS.xcarchive" \
             INSTALL_PATH="/usr/local/lib" \
             SKIP_INSTALL=NO \
             BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
             ARCHS='$(ARCHS_STANDARD)'
 
-    - name: Merge frameworks
-      working-directory: build
+    - name: Build for iOS Simulator
+      working-directory: build-ios
+      run: |
+        xcodebuild archive \
+            -project OCCT.xcodeproj \
+            -scheme ALL_BUILD \
+            -destination "generic/platform=iOS Simulator" \
+            -archivePath "../xcarchives/occt-iOSSimulator.xcarchive" \
+            INSTALL_PATH="/usr/local/lib" \
+            SKIP_INSTALL=NO \
+            BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+            ARCHS='$(ARCHS_STANDARD)'
+
+    - name: Merge static libraries
       run: |
         for ARCHIVE in xcarchives/*.xcarchive;
         do
             libtool -static -o $ARCHIVE/Products/usr/local/lib/occt.a $ARCHIVE/Products/usr/local/lib/*.a
+            echo "Created combined archive file at $ARCHIVE/Products/usr/local/lib/occt.a"
         done
-      #  lipo -create xcarchives/occt-iOS-Simulator-*.xcarchive/Products/usr/local/lib/occt.a -output occt-simulator.a
     
     - name: Copy header files
-      working-directory: build
       run: |
         mkdir -p xcheaders/opencascade
-        cp $(sed -nr 's/\#include "(.*)"/\1/p' ./include/opencascade/*) ./xcheaders/opencascade/
+        cp $(sed -nr 's/\#include "(.*)"/\1/p' ./build/include/opencascade/*) ./xcheaders/opencascade/
 
-    - name: Create xcframework
-      working-directory: build
+    - name: Create XCFramework bundle
       run: |
         xcodebuild -create-xcframework \
           -library xcarchives/occt-iOS.xcarchive/Products/usr/local/lib/occt.a \
           -headers xcheaders/opencascade \
+          -library xcarchives/occt-iOSSimulator.xcarchive/Products/usr/local/lib/occt.a \
+          -headers xcheaders/opencascade \
           -output xcframeworks/occt.xcframework
 
-    - name: Zip xcframework
-      working-directory: build
+    - name: Compress XCFramework bundle
       run: zip -r xcframeworks/occt.xcframework.zip xcframeworks/occt.xcframework
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: occt.xcframework
-        path: build/xcframeworks/occt.xcframework.zip
+        path: xcframeworks/occt.xcframework.zip
