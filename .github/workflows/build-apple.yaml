@@ -22,7 +22,7 @@ jobs:
     - name: Configure CMake for iOS
       env:
         SDK: "iphoneos"
-        SDK_VERSION: "16.0"
+        SDK_VERSION: "17.0"
       run: |
         mkdir build-ios && cd build-ios
         cmake .. \
