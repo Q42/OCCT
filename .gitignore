@@ -53,3 +53,7 @@ win64
 /stamp*
 /build*
 /install
+
+xcarchives
+xcframeworks
+xcheaders
